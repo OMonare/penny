@@ -14,5 +14,7 @@ namespace Penny.Models
         public Guid SellerId { get; set; }
         public string Condition { get; set; }
         public string Description { get; set; }
+
+        public string image { get; set; }
     }
 }
