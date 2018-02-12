@@ -26,6 +26,35 @@ namespace Penny.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Xamarin.Auth._MobileServices.Resource.Animation.slide_in_right = global::Penny.Droid.Resource.Animation.slide_in_right;
+			global::Xamarin.Auth._MobileServices.Resource.Animation.slide_out_left = global::Penny.Droid.Resource.Animation.slide_out_left;
+			global::Xamarin.Auth._MobileServices.Resource.Drawable.ic_arrow_back = global::Penny.Droid.Resource.Drawable.ic_arrow_back;
+			global::Xamarin.Auth._MobileServices.Resource.Id.webview = global::Penny.Droid.Resource.Id.webview;
+			global::Xamarin.Auth._MobileServices.Resource.Layout.activity_webview = global::Penny.Droid.Resource.Layout.activity_webview;
+			global::Xamarin.Auth._MobileServices.Resource.String.ApplicationName = global::Penny.Droid.Resource.String.ApplicationName;
+			global::Xamarin.Auth._MobileServices.Resource.String.Hello = global::Penny.Droid.Resource.String.Hello;
+			global::Xamarin.Auth._MobileServices.Resource.String.title_activity_webview = global::Penny.Droid.Resource.String.title_activity_webview;
+			global::PCLCrypto.Resource.String.ApplicationName = global::Penny.Droid.Resource.String.ApplicationName;
+			global::PCLCrypto.Resource.String.Hello = global::Penny.Droid.Resource.String.Hello;
+		}
+		
+		public partial class Animation
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int slide_in_right = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int slide_out_left = 2131034113;
+			
+			static Animation()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Animation()
+			{
+			}
 		}
 		
 		public partial class Attribute
@@ -41,11 +70,42 @@ namespace Penny.Droid
 			}
 		}
 		
+		public partial class Drawable
+		{
+			
+			// aapt resource value: 0x7f020000
+			public const int ic_arrow_back = 2130837504;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int myButton = 2131034112;
+			// aapt resource value: 0x7f070004
+			public const int btnLogin = 2131165188;
+			
+			// aapt resource value: 0x7f070005
+			public const int btnLoginSignup = 2131165189;
+			
+			// aapt resource value: 0x7f070002
+			public const int edtLoginUsername = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int edtPassword = 2131165187;
+			
+			// aapt resource value: 0x7f070001
+			public const int txtLogin = 2131165185;
+			
+			// aapt resource value: 0x7f070000
+			public const int webview = 2131165184;
 			
 			static Id()
 			{
@@ -60,8 +120,11 @@ namespace Penny.Droid
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int activity_webview = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int Main = 2130968577;
 			
 			static Layout()
 			{
@@ -76,8 +139,8 @@ namespace Penny.Droid
 		public partial class Mipmap
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			// aapt resource value: 0x7f030000
+			public const int Icon = 2130903040;
 			
 			static Mipmap()
 			{
@@ -92,11 +155,20 @@ namespace Penny.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			// aapt resource value: 0x7f060001
+			public const int ApplicationName = 2131099649;
 			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
+			// aapt resource value: 0x7f060000
+			public const int Hello = 2131099648;
+			
+			// aapt resource value: 0x7f060004
+			public const int app_name = 2131099652;
+			
+			// aapt resource value: 0x7f060003
+			public const int hello = 2131099651;
+			
+			// aapt resource value: 0x7f060002
+			public const int title_activity_webview = 2131099650;
 			
 			static String()
 			{

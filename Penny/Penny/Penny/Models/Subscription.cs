@@ -6,5 +6,6 @@ namespace Penny.Models
 {
     public class Subscription
     {
+
     }
 }
