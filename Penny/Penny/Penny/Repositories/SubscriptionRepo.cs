@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Penny.Repositories
 {
-    public class Item
+    public class SubscriptionRepo
     {
     }
 }
