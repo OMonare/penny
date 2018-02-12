@@ -15,9 +15,9 @@ namespace Penny.Models
         public string Condition { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public bool Available { get; set; }
-        public Guid BuyerId { get; set; }
-        public DateTime DateSold { get; set; }
+        public bool? Available { get; set; }
+        public Guid? BuyerId { get; set; }
+        public DateTime? DateSold { get; set; }
 
     }
 }

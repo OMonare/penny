@@ -2,6 +2,7 @@
 using Penny.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace Penny.Repositories
     {
         MobileServiceClient connection = ConnectionManager.MobileService;
 
-        // Returns a list of all the items
+        // Returns a list of all the items that have not been sold
         public async Task<IList<Item>> GetItemsAsync()
         {
             var result = await connection.GetTable<Item>()
@@ -21,6 +22,7 @@ namespace Penny.Repositories
             return result;
         }
 
+        // This will update the item to sold status
         public async Task<bool> SoldItemAsync(Item item, User buyer)
         {
             item.Available = false;
@@ -74,6 +76,31 @@ namespace Penny.Repositories
             {
                 return false;
             }
+        }
+
+
+        // Returns a list of every item that matches what ever condition that the user has specified on the front end
+        // If left blank, the values take defaults, which means it will not apply a filter to that specific field
+        public async Task<IList<Item>> SearchItemAsync(IList<string> city, IList<string> condition, string itemName = "", double minPrice = 0, double maxPrice = Double.MaxValue)
+        {
+            if(city.Count == 0)
+            {
+                city = City.GetConditions();
+            }
+
+            if( condition.Count == 0)
+            {
+                condition = Condition.GetConditions();
+            }
+
+            var result = await connection.GetTable<Item>()
+                .Where(i => city.Contains(i.City) 
+                && condition.Contains(i.Condition)
+                && i.Price >= minPrice
+                && i.Price <= maxPrice)
+                .ToListAsync();
+
+            return result;
         }
     }
 }
