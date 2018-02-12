@@ -8,7 +8,7 @@ namespace Penny.Repositories
 {
     public class ConnectionManager
     {
-        public static MobileServiceClient MobileService = new MobileServiceClient("https://pickitup.azurewebsites.net");
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://pennyapp.azurewebsites.net");
 
         public static async Task<bool> Insert<T>(T objectToInsert)
         {

@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
+using System;
+using Penny.Repositories;
 
 namespace Penny.Droid
 {
@@ -32,14 +35,34 @@ namespace Penny.Droid
 
         }
 
-        private void BtnLogin_Click(object sender, System.EventArgs e)
+        private async void BtnLogin_Click(object sender, System.EventArgs e)
         {
-            
+            try
+            {
+                var user = await UserRepo.login(edtUsername.Text, edtPassword.Text);
+
+                if(user != null)
+                {
+                    Toast.MakeText(this, "Login successful", ToastLength.Long).Show();
+                    StartActivity(new Intent(this, typeof(AddItemActivity)));
+                    Finish();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Login unsuccessful", ToastLength.Long).Show();
+                }
+            }
+            catch(Exception ex)
+            {
+                Toast.MakeText(this, "Login unsuccessful", ToastLength.Long).Show();
+            }
         }
 
         private void BtnSignup_Click(object sender, System.EventArgs e)
         {
-            
+            var intent = new Intent(this, typeof(RegisterActivity));
+            intent.PutExtra("username", edtUsername.Text);
+            StartActivity(intent);
         }
     }
 }

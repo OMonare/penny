@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Penny.Repositories
 {
     public class ItemRepo
     {
 
-        public async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
+        public static async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
         {
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(condition) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(image))
             {
@@ -43,5 +44,7 @@ namespace Penny.Repositories
                 return false;
             }
         }
+
+        
     }
 }

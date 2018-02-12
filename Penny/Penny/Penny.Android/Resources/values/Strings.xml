@@ -2,4 +2,14 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Penny.Droid</string>
+  <string-array name="categories">
+    <item>Laptops and PC\'s</item>
+    <item>Home Appliances</item>
+    <item>Stationary</item>
+    <item>Fashion</item>
+    <item>Gaming</item>
+    <item>Furniture</item>
+    <item>Garden and DIY</item>
+    <item>Other</item>
+  </string-array>
 </resources>

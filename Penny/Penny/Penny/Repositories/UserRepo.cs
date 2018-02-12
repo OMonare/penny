@@ -9,7 +9,7 @@ namespace Penny.Repositories
 {
     public class UserRepo
     {
-        public async Task<User> login(string username, string password)
+        public static async Task<User> login(string username, string password)
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
@@ -39,12 +39,12 @@ namespace Penny.Repositories
 
         }
 
-        public async Task<User> register(string name, string contactNo, string city, string password, string username, string email)
+        public static async Task<User> Register(string name, string contactNo, string city, string password, string username, string email)
         {
 
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(contactNo) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(email))
             {
-                User user = new User()
+                var user = new User()
                 {
                     Id = new Guid(),
                     Name = name,
@@ -59,7 +59,7 @@ namespace Penny.Repositories
 
                 try
                 {
-                    await ConnectionManager.Insert<User>(user);
+                    await ConnectionManager.Insert(user);
                     return user;
                 }
                 catch (Exception ex)
@@ -70,12 +70,12 @@ namespace Penny.Repositories
             } else
             {
                 return null;
-            }
+           }
            
             
         }
 
-        public async Task<User> getUserDetails(string username)
+        public static async Task<User> getUserDetails(string username)
         {
             try
             {
