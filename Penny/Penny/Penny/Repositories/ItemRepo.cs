@@ -24,7 +24,7 @@ namespace Penny.Repositories
         public async Task<bool> SoldItemAsync(Item item, User buyer)
         {
             item.Available = false;
-            item.BuyerID = buyer.Id;
+            item.BuyerId = buyer.Id;
             item.DateSold = DateTime.Now;
 
             try
@@ -55,7 +55,7 @@ namespace Penny.Repositories
                     SellerId = sellerId,
                     Condition =condition,
                     Description = description,
-                    image = image
+                    Image = image
 
                 };
 
