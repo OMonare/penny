@@ -9,6 +9,6 @@ namespace Penny.Repositories
     {
 
         // Returns a list of all the items
-        public async Task<IList<ItemRepo>>
+        //public async Task<IList<ItemRepo>>
     }
 }
