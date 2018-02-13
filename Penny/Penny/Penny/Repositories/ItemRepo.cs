@@ -23,27 +23,6 @@ namespace Penny.Repositories
             return result;
         }
 
-        // This will update the item to sold status
-        public async Task<bool> SoldItemAsync(Item item, User buyer)
-        {
-            item.Available = false;
-            item.BuyerId = buyer.Id;
-            item.DateSold = DateTime.Now;
-
-            try
-            {
-                await connection.GetTable<Item>()
-                .UpdateAsync(item);
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            
-        }
-        
         public async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
         {
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(condition) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(image))
