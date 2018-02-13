@@ -23,7 +23,7 @@ namespace Penny.Repositories
             return result;
         }
 
-        public async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
+        public static async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
         {
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(condition) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(image))
             {

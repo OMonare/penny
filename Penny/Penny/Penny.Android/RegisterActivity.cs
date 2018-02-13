@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 using Penny.Models;
 using Penny.Repositories;
 
@@ -48,7 +49,12 @@ namespace Penny.Droid
                 User user = new User();
                   user = await UserRepo.Register(edtName.Text, edtPhone.Text, edtCity.Text, edtPassword.Text, edtUsername.Text, edtEmail.Text);
                 if (user != null){
-                    Toast.MakeText(this, "Registration was successful", ToastLength.Long).Show();  
+                    Toast.MakeText(this, "Registration was successful", ToastLength.Long).Show();
+                    var userString =JsonConvert.SerializeObject(user);
+                    Intent intent = new Intent(this, typeof(AddItemActivity));
+                    intent.PutExtra("user",userString);
+                    StartActivity(intent);
+                    Finish();
                 }
                 else
                 {

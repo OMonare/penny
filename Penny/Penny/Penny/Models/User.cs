@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Penny.Models
 {
-    public class User
+    public class User 
     {
+
         public string  Name { get; set; }
         public Guid Id { get; set; }
         public string ContactNumber { get; set; }
@@ -14,5 +16,7 @@ namespace Penny.Models
         public string Password { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+
+ 
     }
 }

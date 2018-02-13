@@ -2,6 +2,7 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Penny.Droid</string>
+  <string name="categories_prompt">Pick a category</string>
   <string-array name="categories">
     <item>Laptops and PC\'s</item>
     <item>Home Appliances</item>
@@ -11,5 +12,15 @@
     <item>Furniture</item>
     <item>Garden and DIY</item>
     <item>Other</item>
+  </string-array>
+
+  <string name="condition_prompt">State the condition of your product</string>
+  <string-array name="conditions">
+    <item>Brand New</item>
+    <item>Used - Refurbished</item>
+    <item>Used - Good Condition</item>
+    <item>Used - Decent Condition</item>
+    <item>Used - Needs Refurbishing</item>
+
   </string-array>
 </resources>

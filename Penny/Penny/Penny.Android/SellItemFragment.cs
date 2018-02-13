@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -8,17 +7,16 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using Penny.Models;
 using Penny.Repositories;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Penny.Droid
 {
-    [Activity(Label = "AddItemActivity")]
-    public class AddItemActivity : Activity
+    public class SellItemFragment : Android.Support.V4.App.Fragment
     {
         EditText edtName, edtPrice, edtCity, edtDescription;
         Spinner spinCategory, spinCondition;
@@ -27,42 +25,63 @@ namespace Penny.Droid
         User user;
         ArrayAdapter categoryAdapter, conditionAdapter;
         string condition, category;
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            SetContentView(Resource.Layout.AddItem);
+           // super.onCreate(savedInstanceState);
             base.OnCreate(savedInstanceState);
 
-            var currentUser = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra("user"));
+            // Create your fragment here
+        }
 
-            user = currentUser;
-            
-            edtCity = FindViewById<EditText>(Resource.Id.edtAddItemCity);
-            edtName = FindViewById<EditText>(Resource.Id.edtAddItemName);
-            edtDescription = FindViewById<EditText>(Resource.Id.edtAddItemDescription);
-            edtPrice = FindViewById<EditText>(Resource.Id.edtAddItemPrice);
+        public SellItemFragment(User user)
+        {
+            this.user = user;
+        }
 
-            btnAddItem = FindViewById<Button>(Resource.Id.btnAddItemSell);
-            imgbtnAddImage = FindViewById<ImageButton>(Resource.Id.imgbtnAddItemImage);
-
-            spinCategory = FindViewById<Spinner>(Resource.Id.spinAddItemCategories);
-            spinCondition = FindViewById<Spinner>(Resource.Id.spinAddItemCondition);
-
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
             spinCategory.ItemSelected += SpinCategory_ItemSelected;
-            categoryAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.categories, Android.Resource.Layout.SimpleSpinnerItem);
+            categoryAdapter = ArrayAdapter.CreateFromResource(Activity, Resource.Array.categories, Android.Resource.Layout.SimpleSpinnerItem);
             categoryAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinCategory.Adapter = categoryAdapter;
 
             spinCondition.ItemSelected += SpinCondition_ItemSelected;
-            conditionAdapter = ArrayAdapter.CreateFromResource(this, Resource.Array.conditions, Android.Resource.Layout.SimpleSpinnerItem);
+            conditionAdapter = ArrayAdapter.CreateFromResource(Activity, Resource.Array.conditions, Android.Resource.Layout.SimpleSpinnerItem);
             conditionAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             spinCondition.Adapter = conditionAdapter;
+
+            Toast.MakeText(Activity, user.Name, ToastLength.Long).Show();
+
+            OnCreate(savedInstanceState);
+        }
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            // Use this to return your custom view for this Fragment
+             View rootView = inflater.Inflate(Resource.Layout.AddItem, container, false);
+
+            edtCity = rootView.FindViewById<EditText>(Resource.Id.edtAddItemCity);
+            edtName = rootView.FindViewById<EditText>(Resource.Id.edtAddItemName);
+            edtDescription = rootView.FindViewById<EditText>(Resource.Id.edtAddItemDescription);
+            edtPrice = rootView.FindViewById<EditText>(Resource.Id.edtAddItemPrice);
+
+            btnAddItem = rootView.FindViewById<Button>(Resource.Id.btnAddItemSell);
+            imgbtnAddImage = rootView.FindViewById<ImageButton>(Resource.Id.imgbtnAddItemImage);
+
+            spinCategory = rootView.FindViewById<Spinner>(Resource.Id.spinAddItemCategories);
+            spinCondition = rootView.FindViewById<Spinner>(Resource.Id.spinAddItemCondition);
+
+           
 
             btnAddItem.Click += BtnAddItem_Click;
             imgbtnAddImage.Click += ImgbtnAddImage_Click;
 
-            Toast.MakeText(this, user.Name , ToastLength.Long).Show();
-         }
+            
+
+            return rootView;
+
+
+        }
 
         private void SpinCondition_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
@@ -77,19 +96,19 @@ namespace Penny.Droid
         }
 
         private void ImgbtnAddImage_Click(object sender, EventArgs e)
-        {           
-            
+        {
+
         }
 
         private async void BtnAddItem_Click(object sender, EventArgs e)
         {
             if (await ItemRepo.AddItem(edtName.Text, category, Double.Parse(edtPrice.Text), edtCity.Text, user.Id, condition, edtDescription.Text, "example.jpg"))
             {
-                Toast.MakeText(this, "Item added", ToastLength.Long).Show();
+                Toast.MakeText(Activity, "Item added", ToastLength.Long).Show();
             }
             else
             {
-                Toast.MakeText(this, "Item failed", ToastLength.Long).Show();
+                Toast.MakeText(Activity, "Item failed", ToastLength.Long).Show();
             }
         }
     }

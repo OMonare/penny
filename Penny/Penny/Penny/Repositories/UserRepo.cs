@@ -9,28 +9,54 @@ namespace Penny.Repositories
 {
     public class UserRepo
     {
+        //public static async Task<List<User>> login(string username, string password)
+        //{
+        //    if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+        //    {
+        //        try
+        //        {
+
+        //            var userTable = ConnectionManager.MobileService.GetTable<User>();
+        //            var user = (await userTable
+        //                //   .Where(u => u.Username == username && u.Password == password)
+        //                .ToListAsync());
+        //            //    .FirstOrDefault();
+
+        //             return user;
+
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return null;
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+
+        //}
+
         public static async Task<User> login(string username, string password)
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
                 try
                 {
-                    var user = (await (ConnectionManager.MobileService.GetTable<User>().Where(u => u.Username == username)).ToListAsync()).FirstOrDefault();
+                    var user = (await ConnectionManager.MobileService.GetTable<User>()
+                        .Where(u => u.Username == username && u.Password == password)
+                        .ToListAsync())
+                        .FirstOrDefault();
 
-                    if (user.Username == username && user.Password == password)
-                    {
-                        return user;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return user;
                 }
                 catch (Exception ex)
                 {
                     return null;
                 }
-                
+
             }
             else
             {
@@ -46,7 +72,7 @@ namespace Penny.Repositories
             {
                 var user = new User()
                 {
-                    Id = new Guid(),
+                   // Id = new Guid(),
                     Name = name,
                     Username = username,
                     ContactNumber = contactNo,

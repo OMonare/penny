@@ -4,6 +4,9 @@ using Android.OS;
 using Android.Content;
 using System;
 using Penny.Repositories;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
+using Penny.Models;
 
 namespace Penny.Droid
 {
@@ -44,7 +47,11 @@ namespace Penny.Droid
                 if(user != null)
                 {
                     Toast.MakeText(this, "Login successful", ToastLength.Long).Show();
-                    StartActivity(new Intent(this, typeof(AddItemActivity)));
+                    
+                    var userString = JsonConvert.SerializeObject(user);
+                    Intent intent = new Intent(this, typeof(TabsActivity));
+                    intent.PutExtra("user", userString);
+                    StartActivity(intent);
                     Finish();
                 }
                 else
@@ -65,5 +72,7 @@ namespace Penny.Droid
             StartActivity(intent);
         }
     }
+
+    
 }
 

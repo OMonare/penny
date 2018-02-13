@@ -20,7 +20,8 @@
         android:id="@+id/spinAddItemCategories"
         android:contentDescription="Category"
         android:spinnerMode="dropdown" 
-        android:entries="@array/categories"/>
+        android:entries="@array/categories"
+        android:prompt="@string/categories_prompt"/>
     <EditText
         android:inputType="numberDecimal"
         android:layout_width="match_parent"
@@ -35,7 +36,11 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinAddItemCondition" />
+        android:id="@+id/spinAddItemCondition" 
+        android:contentDescription="Condition"
+        android:spinnerMode="dropdown" 
+        android:entries="@array/conditions"
+        android:prompt="@string/condition_prompt"/>
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
