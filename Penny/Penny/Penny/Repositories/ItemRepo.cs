@@ -23,13 +23,33 @@ namespace Penny.Repositories
             return result;
         }
 
-        public static async Task<bool> AddItem(string name, string category, double price, string city, Guid sellerId, string condition, string description, string image)
+        //Returns a list of all items posted by the current logged in user
+        public static async Task<IList<Item>> GetCurrentUsersItemsAsync(string currentUserId)
+        {
+            var result = await ConnectionManager.MobileService.GetTable<Item>()
+                .Where(i => i.SellerId == currentUserId)
+                .ToListAsync();
+
+            return result;
+        }
+
+        //Returns a list of all items that are available near the user
+        public static async Task<IList<Item>> GetLocalItemsAsync(string city)
+        {
+            var result = await ConnectionManager.MobileService.GetTable<Item>()
+                .Where(i=>i.City==city)
+                .ToListAsync();
+
+            return result;
+        }
+
+        public static async Task<bool> AddItem(string name, string category, double price, string city, string sellerId, string condition, string description, string image)
         {
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(condition) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(image))
             {
                 Item item = new Item()
                 {
-                    Id = new Guid(),
+                   
                     Name = name,
                     Category = category,
                     Price = price,
@@ -37,7 +57,8 @@ namespace Penny.Repositories
                     SellerId = sellerId,
                     Condition =condition,
                     Description = description,
-                    Image = image
+                    Image = image,
+                    Available = true
 
                 };
 

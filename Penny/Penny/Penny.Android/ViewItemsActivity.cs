@@ -18,27 +18,27 @@ using Penny.Repositories;
 
 namespace Penny.Droid
 {
-    public class BuyItemFragment : Android.Support.V4.App.Fragment
+    public class ViewItemsFragment : Android.Support.V4.App.Fragment
     {
-       
+
         User user;
         IList<Item> items;
         ItemAdapter itemAdapter;
         View parentView;
 
-        public BuyItemFragment(User user, IList<Item> items)
+        public ViewItemsFragment(User user, IList<Item> items)
         {
             this.user = user;
             this.items = items;
-            
+
         }
 
-        public  override void OnActivityCreated(Bundle savedInstanceState)
+        public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
             try
             {
-                
+
                 Toast.MakeText(Activity, items.FirstOrDefault().Name, ToastLength.Long).Show();
             }
             catch
@@ -50,16 +50,16 @@ namespace Penny.Droid
 
         public override void OnAttach(Context context)
         {
-           
+
             //recyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
             //recyclerView.SetLayoutManager(layoutManager);
             //recyclerView.SetAdapter(itemAdapter);
             base.OnAttach(context);
 
         }
- 
 
-        public  override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // return base.OnCreateView(inflater, container, savedInstanceState);
 
@@ -85,4 +85,5 @@ namespace Penny.Droid
 
     }
 
+   
 }

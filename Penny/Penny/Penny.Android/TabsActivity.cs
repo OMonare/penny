@@ -9,10 +9,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using Penny.Models;
+using Penny.Repositories;
 
 namespace Penny.Droid
 {
@@ -21,8 +23,11 @@ namespace Penny.Droid
     {
         TabLayout tabLayout;
         User currentUser;
-        
-        protected override void OnCreate(Bundle savedInstanceState)
+        IList<Item> items;
+        RecyclerView recyclerView;
+        RecyclerView.LayoutManager layoutManager;
+
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             SetContentView(Resource.Layout.Tabs);
 
@@ -31,29 +36,33 @@ namespace Penny.Droid
             // Create your application here
             tabLayout = FindViewById<TabLayout>(Resource.Id.mainTabLayout);
             tabLayout.TabSelected += TabLayout_TabSelected;
-            fragmentNavigate(new BuyItemFragment());
             currentUser = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra("user"));
+            items = await ItemRepo.GetLocalItemsAsync(currentUser.City);
             
+  
+            fragmentNavigate(new BuyItemFragment(currentUser, items));
+
         }
 
-        private void TabLayout_TabSelected(object sender, TabLayout.TabSelectedEventArgs e)
+        private async void TabLayout_TabSelected(object sender, TabLayout.TabSelectedEventArgs e)
         {
             switch(e.Tab.Position)
             { 
                 case 0:
-                    fragmentNavigate(new SellItemFragment(currentUser));
+                    items = await ItemRepo.GetLocalItemsAsync(currentUser.City);
+                    fragmentNavigate(new BuyItemFragment(currentUser, items));
                     break;
+
                 case 1:
-                    fragmentNavigate(new BuyItemFragment());
-                    break;
-                case 2:
-                    fragmentNavigate(new ProfileFragment());
+                    items = await ItemRepo.GetCurrentUsersItemsAsync(currentUser.Id);
+                    fragmentNavigate(new ViewItemsFragment(currentUser, items));
                     break;
             }
         }
 
         private void fragmentNavigate(Android.Support.V4.App.Fragment fragment)
-        {
+        {        
+
             var transaction = SupportFragmentManager.BeginTransaction();
             transaction.Replace(Resource.Id.contentFrame, fragment);
             transaction.Commit();

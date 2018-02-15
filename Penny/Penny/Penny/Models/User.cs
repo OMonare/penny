@@ -9,7 +9,7 @@ namespace Penny.Models
     {
 
         public string  Name { get; set; }
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string ContactNumber { get; set; }
         public int SellerRating { get; set; }
         public string City { get; set; }

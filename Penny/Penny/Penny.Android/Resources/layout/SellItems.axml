@@ -6,23 +6,23 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:padding="5dp">
-    <TextView
-        android:text="Buy Item"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
+  <TextView
+      android:text="Leads"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/txtLeads" />
 
   <android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerView"
+    android:id="@+id/recyclerViewSell"
     android:scrollbars="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!---->
-    
+
   </android.support.v7.widget.RecyclerView>
 
-  
+
 
 </LinearLayout>
